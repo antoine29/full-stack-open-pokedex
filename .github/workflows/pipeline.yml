@@ -24,3 +24,8 @@ jobs:
           command: npm run test:e2e
           start: npm run serve-prod
           wait_on: http://localhost:5000
+      - uses: akhileshns/heroku-deploy@v3.8.9
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "tranquil-escarpment-08399"
+          heroku_email: "floresgomezanthony@gmail.com"

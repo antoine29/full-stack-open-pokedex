@@ -1,0 +1,9 @@
+# FullStackOpen - CI/CD overview
+Talking about a little REST application written with C#. In order to garanty the code quality and the overall functionallity along the developing process by a development team, we could set some code linting rules and also we could write a set of unit tests or integrations tests too.
+
+But we would need to check these linting rules and the defined tests every time a developer send a change to the main branch, in this way we could avoid a change breaking something. This task would seem to be overwhelming and repeatitive. But by setting a CI process could help to automatize these checkings.
+
+To achieve this goal, multiple CI tools and paltforms are been developed.
+Besides GitHub actions or Jenkins, there are other options like GitLab CI integrations. Before GitHub released its own CI tools (aka. actions) Gitlab already did offers a complete toolkit to achieve the same goal. With the advantage of being used in the GitLab cloud or by setting your own instance of GitLab.
+Another totally web based option is Travis CI, it works linking your GitHub repository to the jenkins platform and by defining the CI steps in a `yml` file. So at every commited change, then Jenkins 'would' execute the checkings.
+In the GitLab case the service setting up is an optional requirement, since you can use the GitLab cloud platform as well. But as same as in the TravisCI, this cloud based environment there are some limitations on the resources dedicated to the CI process. So in on order to pick a self hosted or a cloud based environment you should ask you before how many resources/effort you are allowed to implement the CI service. Also you have to cosiderer the complexity of the application you are developing. In the case of a simple application, maybe a cloud based alternative will cover the requirements.

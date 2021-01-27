@@ -29,3 +29,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "tranquil-escarpment-08399"
           heroku_email: "floresgomezanthony@gmail.com"
+          healthcheck: "https://tranquil-escarpment-08399.herokuapp.com/health"

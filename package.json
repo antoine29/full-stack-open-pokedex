@@ -12,7 +12,6 @@
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
     "serve-prod": "npm run build && npm run start-prod",
-    "heroku-deploy": "npm run start-prod",
     "heroku-postbuild": "npm install --also=dev && npm run build"
   },
   "repository": {

@@ -23,13 +23,14 @@ jobs:
       - name: unit tests
         run: npm run test
       - name: integration tests
-      - uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
           start: npm run serve-prod
           wait_on: http://localhost:5000
       - name: heroku deployment
-      - uses: akhileshns/heroku-deploy@v3.8.9
+        if: ${{ github.event_name == 'push' }}
+        uses: akhileshns/heroku-deploy@v3.8.9
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "tranquil-escarpment-08399"

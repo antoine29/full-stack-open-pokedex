@@ -49,4 +49,4 @@ jobs:
         env:
           COMMITS: ${{ toJson(github.event.commits.*.message) }}
           FLAG: ${{ contains(github.event.commits.*.message, '#skip') }}
-        run:  echo "FLAG:" && echo "$FLAG"
+        run:  echo "COMMITS:" && echo "$COMMITS" && echo "FLAG:" && echo "$FLAG"

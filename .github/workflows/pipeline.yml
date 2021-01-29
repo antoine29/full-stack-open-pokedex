@@ -45,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
       - name: Commit testing
-        if: ${{ toJson(github.event.commits.*.message) == 'push' }}
+        # if: ${{ toJson(github.event.commits.*.message) == 'push' }}
         env:
           COMMITS: ${{ toJson(github.event.commits.*.message) }}
           FLAG: ${{ contains(github.event.commits.*.message, '#skip') }}

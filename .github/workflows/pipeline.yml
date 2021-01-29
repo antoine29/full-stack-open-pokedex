@@ -22,19 +22,31 @@ jobs:
         run: npm run eslint
       - name: unit tests
         run: npm run test
-      - name: integration tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run serve-prod
-          wait_on: http://localhost:5000
-      - name: heroku deployment
+      # - name: integration tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm run serve-prod
+      #     wait_on: http://localhost:5000
+      # - name: heroku deployment
+      #   if: ${{ github.event_name == 'push' }}
+      #   uses: akhileshns/heroku-deploy@v3.8.9
+      #   with:
+      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #     heroku_app_name: "tranquil-escarpment-08399"
+      #     heroku_email: "floresgomezanthony@gmail.com"
+      #     healthcheck: "https://tranquil-escarpment-08399.herokuapp.com/health"
+      #     checkstring: "ok"
+      #     rollbackonhealthcheckfailed: true
+      - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
-        uses: akhileshns/heroku-deploy@v3.8.9
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "tranquil-escarpment-08399"
-          heroku_email: "floresgomezanthony@gmail.com"
-          healthcheck: "https://tranquil-escarpment-08399.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+      - name: Commit testing
+        # if: ${{ toJson(github.event.commits.*.message) == 'push' }}
+        env:
+          COMMITS: ${{ toJson(github.event.commits.*) }}
+          FLAG: ${{ contains(github.event.commits.*.message, '#skip') }}
+        run:  echo "COMMITS:" && echo "$COMMITS" && echo "FLAG:" && echo "$FLAG"

@@ -20,8 +20,8 @@ jobs:
         run: npm install
       - name: lint
         run: npm run eslint
-      # - name: unit tests
-      #   run: npm run test
+      - name: unit tests
+        run: npm run test
       # - name: integration tests
       #   uses: cypress-io/github-action@v2
       #   with:
@@ -39,6 +39,7 @@ jobs:
       #     checkstring: "ok"
       #     rollbackonhealthcheckfailed: true
       - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
